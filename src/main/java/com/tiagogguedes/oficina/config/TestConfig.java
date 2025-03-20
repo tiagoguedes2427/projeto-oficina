@@ -10,13 +10,27 @@ import org.springframework.context.annotation.Profile;
 import com.tiagogguedes.oficina.entities.User;
 import com.tiagogguedes.oficina.repositories.UserRepository;
 
+
+//Classe auxiliar para algumas configurações exclusiva para o
+//perfil de teste
+
+
 @Configuration
+//Essa anotação tem que ser igual ao arguivo application.properties
+//profiles test
+
+//Implementou o CommandLineRunner para adicionar no
+//banco de dados ja ao iniciar a aplicação
+
 @Profile("test")
 public class TestConfig implements CommandLineRunner{
 	
+	//injeção de dependências 
 	@Autowired
 	private UserRepository userRepository;
 
+	//Metodo funciona desde o início da aplicaççao
+	//e ja adiciona no banco de dados
 	@Override
 	public void run(String... args) throws Exception {
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); 
