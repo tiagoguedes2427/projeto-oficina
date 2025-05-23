@@ -1,12 +1,17 @@
 package com.tiagogguedes.oficina.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +29,28 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
+	//obs: No caso de coleção, apenas faz os gets
+	@JsonIgnore
+	@OneToMany(mappedBy = "supervisor")
+	private List<Servico> servicos = new ArrayList<>();
+	
+	/*Essa forma so funciona por meio dessa conf
+	 * spring.jpa.open-in-view=true, no arq application.properties
+	 * 
+	 *  "id": 1,
+    "momento": "2019-06-20T19:53:07Z",
+    "supervisor": {
+        "id": 1,
+        "name": "Maria Brown",
+        "email": "maria@gmail.com",
+        "phone": "988888888",
+        "password": "123456"
+    }
+	 * @JsonIgnore essa anotação impede do jason ficar associando
+	 * os ids em lupim
+	 * 
+	 * 
+	 * */
 	
 	public User () {}
 
@@ -60,6 +87,10 @@ public class User implements Serializable{
 
 	public String getEmail() {
 		return email;
+	}
+	
+	public List<Servico> getServicos() {
+		return servicos;
 	}
 
 
@@ -105,6 +136,9 @@ public class User implements Serializable{
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
+
+
+	
 	
 	
 	

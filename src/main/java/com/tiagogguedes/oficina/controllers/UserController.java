@@ -1,4 +1,4 @@
-package com.tiagogguedes.oficina.resources;
+package com.tiagogguedes.oficina.controllers;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.tiagogguedes.oficina.services.UserService;
 @RestController
 //usada para mapear solicitações HTTP
 @RequestMapping(value = "/users")
-public class UserResource {
+public class UserController {
 	
 	@Autowired
 	private UserService service;
